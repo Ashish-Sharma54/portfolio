@@ -95,12 +95,31 @@ export default function Contact() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormState({ name: "", email: "", message: "" });
+    setLoading(true);
+    try {
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "4469079c-8772-4443-931f-36ae22a3c2d6",
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+          subject: `New message from ${formState.name} — Portfolio`,
+        }),
+      });
+      setSubmitted(true);
+      setFormState({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch {
+      alert("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -208,7 +227,8 @@ export default function Contact() {
               whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(99,102,241,0.3)" }}
               whileTap={{ scale: 0.97 }}
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-3.5 font-medium text-white transition-all sm:w-auto"
+              disabled={loading}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 px-6 py-3.5 font-medium text-white transition-all sm:w-auto disabled:opacity-50"
             >
               {submitted ? (
                 <motion.span
@@ -217,6 +237,8 @@ export default function Contact() {
                 >
                   Message Sent!
                 </motion.span>
+              ) : loading ? (
+                "Sending..."
               ) : (
                 <>
                   <Send className="h-4 w-4" />
