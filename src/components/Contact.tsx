@@ -124,8 +124,8 @@ export default function Contact() {
 
   const contactInfo = [
     { icon: Mail, label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-    { icon: MapPin, label: "Location", value: "Remote / Worldwide", href: "" },
-    { icon: Phone, label: "Availability", value: "Open to opportunities", href: "" },
+    { icon: Phone, label: "Phone", value: siteConfig.phone, href: `tel:${siteConfig.phone}` },
+    { icon: MapPin, label: "Location", value: siteConfig.location, href: "" },
   ];
 
   return (

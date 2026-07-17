@@ -5,9 +5,11 @@ export const siteConfig = {
   description:
     "Building intelligent systems at the intersection of AI, IoT, and Cloud. Passionate about solving real-world problems with machine learning and embedded systems.",
   url: "https://github.com/Ashish-Sharma54",
-  email: "officialashish.332028@gmail.com",
+  email: "ashish051012@gmail.com",
   github: "https://github.com/Ashish-Sharma54",
-  linkedin: "https://www.linkedin.com/in/aashishsharma54",
+  linkedin: "https://www.linkedin.com/in/ashish-sharma-796844255",
+  phone: "7240668921",
+  location: "NIT Rourkela, Odisha",
   resumeUrl: "/resume.pdf",
 };
 
